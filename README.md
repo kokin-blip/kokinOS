@@ -16,12 +16,16 @@ Fedora Atomic and bootc-based systems are built from bootable OCI container imag
 | --- | --- | --- |
 | `ghcr.io/kokin-blip/kokinos:stable` | `ghcr.io/ublue-os/bazzite:stable` | AMD and Intel systems |
 | `ghcr.io/kokin-blip/kokinos-nvidia:stable` | `ghcr.io/ublue-os/bazzite-nvidia-open:stable` | NVIDIA systems |
+| `ghcr.io/kokin-blip/kokinos-mac:stable` | `quay.io/fedora/fedora-kinoite:42` | Apple Silicon VMware Fusion testing |
+
+`kokinos-mac` is a test flavor for ARM64 Macs. It uses Fedora Kinoite instead of Bazzite because the Bazzite base image is currently x86_64-only in this repo's build path.
 
 ## Build
 
 ```bash
 just build kokinos stable ghcr.io/ublue-os/bazzite:stable
 just build kokinos-nvidia stable ghcr.io/ublue-os/bazzite-nvidia-open:stable
+just build kokinos-mac stable quay.io/fedora/fedora-kinoite:42
 ```
 
 Published builds are created by GitHub Actions and pushed to GitHub Container Registry.

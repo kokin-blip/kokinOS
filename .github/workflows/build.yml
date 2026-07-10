@@ -12,6 +12,17 @@ on:
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
+    inputs:
+      image:
+        description: "Image to build"
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - kokinos
+          - kokinos-nvidia
+          - kokinos-mac
 
 env:
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
@@ -23,15 +34,20 @@ concurrency:
 jobs:
   build_push:
     name: Build and push ${{ matrix.image.name }}
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.image.runner }}
     strategy:
       fail-fast: false
       matrix:
         image:
           - name: kokinos
             base: ghcr.io/ublue-os/bazzite:stable
+            runner: ubuntu-24.04
           - name: kokinos-nvidia
             base: ghcr.io/ublue-os/bazzite-nvidia-open:stable
+            runner: ubuntu-24.04
+          - name: kokinos-mac
+            base: quay.io/fedora/fedora-kinoite:42
+            runner: ubuntu-24.04-arm
 
     permissions:
       contents: read
@@ -39,28 +55,45 @@ jobs:
       id-token: write
 
     steps:
+      - name: Matrix filter
+        id: matrix-filter
+        shell: bash
+        run: |
+          selected_image="${{ inputs.image || 'all' }}"
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${selected_image}" != "all" && "${selected_image}" != "${{ matrix.image.name }}" ]]; then
+            echo "should_build=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "should_build=true" >> "${GITHUB_OUTPUT}"
+          fi
+
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
+        if: steps.matrix-filter.outputs.should_build == 'true'
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
       - name: Maximize build space
+        if: steps.matrix-filter.outputs.should_build == 'true' && matrix.image.runner != 'ubuntu-24.04-arm'
         uses: ublue-os/remove-unwanted-software@695eb75bc387dbcd9685a8e72d23439d8686cba6
 
       - name: Install just
+        if: steps.matrix-filter.outputs.should_build == 'true'
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 #v4.0.0
 
       - name: Check Just Syntax
+        if: steps.matrix-filter.outputs.should_build == 'true'
         shell: bash
         run: |
           just check
 
       - name: Image Name
+        if: steps.matrix-filter.outputs.should_build == 'true'
         id: image-name
         run: |
           echo "IMAGE_NAME=${{ matrix.image.name }}" >> $GITHUB_ENV
           echo "BASE_IMAGE=${{ matrix.image.base }}" >> $GITHUB_ENV
 
       - name: Default Tag
+        if: steps.matrix-filter.outputs.should_build == 'true'
         id: gen-default-tag
         run: |
           DEFAULT_TAG=$(just generate-default-tag)
@@ -68,6 +101,7 @@ jobs:
           echo "DEFAULT_TAG=${DEFAULT_TAG}" >> $GITHUB_ENV
 
       - name: Prepare environment
+        if: steps.matrix-filter.outputs.should_build == 'true'
         run: |
           # Lowercase the image uri https://github.com/macbre/push-to-ghcr/issues/12
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
@@ -75,6 +109,7 @@ jobs:
 
       # This actually builds the container image
       - name: Build Image
+        if: steps.matrix-filter.outputs.should_build == 'true'
         id: build-image
         run: |
           sudo -E $(command -v just) build \
@@ -102,6 +137,7 @@ jobs:
       #       ${DEFAULT_TAG}
 
       - name: Generate Build Tags
+        if: steps.matrix-filter.outputs.should_build == 'true'
         id: gen-build-tags
         run: |
           alias_tags="$(just generate-build-tags \
@@ -113,6 +149,7 @@ jobs:
           echo "alias_tags=${alias_tags}" >> $GITHUB_OUTPUT
 
       - name: Tag Image
+        if: steps.matrix-filter.outputs.should_build == 'true'
         id: tag-images
         env:
           ALIAS_TAGS: ${{ steps.gen-build-tags.outputs.alias_tags }}
@@ -126,14 +163,14 @@ jobs:
       # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
       - name: Login to GitHub Container Registry
         uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: steps.matrix-filter.outputs.should_build == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push To GHCR
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: steps.matrix-filter.outputs.should_build == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         id: push-image
         env:
           ALIAS_TAGS: ${{ steps.gen-build-tags.outputs.alias_tags }}
@@ -148,13 +185,13 @@ jobs:
           echo "digest=${digest}" >> $GITHUB_OUTPUT
 
       - name: Install image inspection tools
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: steps.matrix-filter.outputs.should_build == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         run: |
           sudo apt-get update
           sudo apt-get install -y jq skopeo
 
       - name: Verify image rootfs metadata
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: steps.matrix-filter.outputs.should_build == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         env:
           GHCR_CREDS: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
           DIGEST: ${{ steps.push-image.outputs.digest }}
@@ -179,14 +216,14 @@ jobs:
       # to consume. For more details, review the image signing section of the README.
       - name: Install Cosign
         uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: steps.matrix-filter.outputs.should_build == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         # https://github.com/containers/container-libs/issues/388
         with:
           cosign-release: 'v2.6.3'
 
       - name: Sign container image
         id: sign-image
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: steps.matrix-filter.outputs.should_build == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         env:
           COSIGN_EXPERIMENTAL: false
           COSIGN_PASSWORD: ""

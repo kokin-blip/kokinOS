@@ -10,6 +10,7 @@
 ## VM
 
 - VMware Fusion boots the `kokinos` Anaconda ISO.
+- Apple Silicon VMware Fusion boots the `kokinos-mac` ARM64 Anaconda ISO.
 - ISO boots and installs.
 - Login screen appears.
 - KDE Plasma starts.

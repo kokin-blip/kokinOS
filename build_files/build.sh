@@ -8,12 +8,14 @@ cp -avf "/ctx/system_files"/. /
 ### KokinOS developer defaults
 dnf5 install -y \
     cargo \
+    distrobox \
     gcc \
     gh \
     git \
     golang \
     just \
     nodejs \
+    podman \
     python3-pip \
     rust \
     tmux

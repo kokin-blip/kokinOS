@@ -24,13 +24,21 @@ Run the `Build disk images` workflow from GitHub Actions and choose `amd64`. The
 
 Use the standard image for AMD/Intel systems and the NVIDIA image for NVIDIA systems.
 
+For Apple Silicon VMware Fusion testing, run the same workflow with:
+
+- `platform`: `arm64`
+- `image`: `kokinos-mac`
+- `disk_type`: `anaconda-iso`
+
+The Mac test image is based on Fedora Kinoite ARM64 rather than Bazzite, because VMware Fusion on Apple Silicon runs ARM64 guests and cannot boot the x86_64 Bazzite-based KokinOS images.
+
 ## VMware Fusion
 
 VMware Fusion is a good first VM target for KokinOS smoke testing.
 
 1. Run the `Build disk images` workflow from GitHub Actions.
-2. Choose `amd64` for a normal x86_64 VM.
-3. Download the `anaconda-iso` artifact for `kokinos`.
+2. Choose `amd64` for a normal x86_64 VM, or `arm64` with `kokinos-mac` on Apple Silicon.
+3. Download the `anaconda-iso` artifact for the image you selected.
 4. Create a new Linux VM in VMware Fusion and attach the KokinOS ISO.
 5. Boot the VM, install KokinOS, then reboot into the installed system.
 
