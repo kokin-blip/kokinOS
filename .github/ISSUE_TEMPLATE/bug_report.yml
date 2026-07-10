@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a KokinOS beta problem
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect?
+  - type: input
+    id: image
+    attributes:
+      label: Image
+      placeholder: ghcr.io/kokin-blip/kokinos:stable
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware
+      description: CPU, GPU, laptop/desktop, and anything unusual.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste relevant logs or command output.

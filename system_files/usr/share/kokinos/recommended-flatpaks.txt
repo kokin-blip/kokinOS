@@ -1,0 +1,9 @@
+com.heroicgameslauncher.hgl
+com.obsproject.Studio
+com.usebottles.bottles
+com.valvesoftware.Steam
+com.visualstudio.code
+io.github.flattool.Warehouse
+net.davidotek.pupgui2
+org.mozilla.firefox
+org.videolan.VLC

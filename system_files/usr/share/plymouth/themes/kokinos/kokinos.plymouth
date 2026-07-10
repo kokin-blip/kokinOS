@@ -1,0 +1,7 @@
+[Plymouth Theme]
+Name=KokinOS
+Description=KokinOS boot splash
+ModuleName=script
+
+[script]
+ScriptFile=/usr/share/plymouth/themes/kokinos/kokinos.script

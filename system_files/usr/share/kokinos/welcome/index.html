@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KokinOS Welcome</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101820;
+      --panel: #16242d;
+      --text: #f5f7ef;
+      --muted: #b8c7bf;
+      --green: #39d98a;
+      --blue: #2aa8ff;
+      --gold: #f5c542;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, "Noto Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    main {
+      width: min(980px, calc(100% - 40px));
+      margin: 48px auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    img {
+      width: 88px;
+      height: 88px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 44px;
+    }
+    p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    a {
+      display: block;
+      min-height: 112px;
+      padding: 18px;
+      border: 1px solid #29434a;
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      text-decoration: none;
+    }
+    a strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+    }
+    a:nth-child(2) strong { color: var(--blue); }
+    a:nth-child(3) strong { color: var(--gold); }
+    a:nth-child(4) strong { color: var(--green); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <img src="/usr/share/icons/KokinOS/scalable/apps/kokinos.svg" alt="">
+      <div>
+        <h1>KokinOS</h1>
+        <p>A Bazzite-powered KDE system for gaming, development, and daily use.</p>
+      </div>
+    </header>
+    <section class="grid">
+      <a href="https://docs.bazzite.gg/Installing_and_Managing_Software/Updates_Rollbacks_and_Rebasing/">
+        <strong>Update and rollback</strong>
+        Manage system updates with bootc and keep a safe fallback deployment.
+      </a>
+      <a href="https://docs.bazzite.gg/Gaming/">
+        <strong>Gaming setup</strong>
+        Check Proton, launchers, controllers, and performance tools.
+      </a>
+      <a href="https://docs.bazzite.gg/Installing_and_Managing_Software/Containers/">
+        <strong>Developer containers</strong>
+        Use Distrobox and Podman for isolated programming environments.
+      </a>
+      <a href="https://github.com/kokin-blip/kokinOS/issues">
+        <strong>Feedback</strong>
+        Report beta issues and request improvements.
+      </a>
+    </section>
+  </main>
+</body>
+</html>

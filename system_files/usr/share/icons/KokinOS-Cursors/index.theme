@@ -1,0 +1,4 @@
+[Icon Theme]
+Name=KokinOS Cursors
+Comment=KokinOS cursor theme inheriting Breeze
+Inherits=breeze_cursors

@@ -1,0 +1,3 @@
+KokinOS system branding and metadata live here.
+
+The original upstream os-release file is copied to os-release.base during image build.

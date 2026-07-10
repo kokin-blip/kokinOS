@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=KokinOS Welcome
+Comment=Start here with KokinOS
+Exec=kokinos-welcome
+Icon=kokinos
+Terminal=false
+Categories=System;

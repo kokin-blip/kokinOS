@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=KokinOS Welcome
+Exec=kokinos-welcome
+Icon=kokinos
+Terminal=false
+X-KDE-autostart-after=panel
+X-KDE-StartupNotify=false

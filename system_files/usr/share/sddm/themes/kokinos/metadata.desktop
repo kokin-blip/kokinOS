@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=KokinOS
+Description=KokinOS login theme
+Author=kokin-blip
+License=Apache-2.0
+Type=sddm-theme
+Version=0.1.0
+Website=https://github.com/kokin-blip/kokinOS
+Screenshot=preview.svg
+MainScript=Main.qml
+ConfigFile=theme.conf

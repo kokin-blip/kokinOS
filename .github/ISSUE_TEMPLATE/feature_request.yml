@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest an improvement for KokinOS
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should KokinOS support or improve?
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why it matters
+      description: Explain the gaming, programming, or everyday-use benefit.

@@ -1,0 +1,15 @@
+[General]
+ColorScheme=KokinOS
+Name=KokinOS
+
+[Icons]
+Theme=KokinOS
+
+[KDE]
+SingleClick=false
+
+[WM]
+activeBackground=16,24,32
+activeForeground=245,247,239
+inactiveBackground=22,83,68
+inactiveForeground=245,247,239

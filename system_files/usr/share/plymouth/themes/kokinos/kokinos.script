@@ -1,0 +1,15 @@
+Window.SetBackgroundTopColor(0.063, 0.094, 0.125);
+Window.SetBackgroundBottomColor(0.063, 0.094, 0.125);
+
+message.image = Image.Text("KokinOS", 0.961, 0.969, 0.937);
+message.sprite = Sprite(message.image);
+message.sprite.SetX(Window.GetWidth() / 2 - message.image.GetWidth() / 2);
+message.sprite.SetY(Window.GetHeight() / 2 - message.image.GetHeight() / 2);
+message.timer = 0;
+
+fun refresh_callback() {
+  message.sprite.SetOpacity(0.85 + Math.Sin(message.timer) * 0.15);
+  message.timer += 0.08;
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

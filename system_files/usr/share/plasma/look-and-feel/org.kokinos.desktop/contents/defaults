@@ -1,0 +1,12 @@
+[kdeglobals][General]
+ColorScheme=KokinOS
+Name=KokinOS
+
+[kdeglobals][Icons]
+Theme=KokinOS
+
+[plasmarc][Theme]
+name=KokinOS
+
+[Wallpaper]
+Image=file:///usr/share/wallpapers/KokinOS/contents/images/3840x2160.svg

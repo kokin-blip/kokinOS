@@ -1,0 +1,11 @@
+{
+  "KPlugin": {
+    "Id": "org.kokinos.desktop",
+    "Name": "KokinOS",
+    "Description": "KokinOS KDE Plasma look and feel",
+    "Version": "0.1.0",
+    "License": "Apache-2.0",
+    "Website": "https://github.com/kokin-blip/kokinOS"
+  },
+  "X-KDE-PluginInfo-Name": "org.kokinos.desktop"
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160">
+  <rect width="3840" height="2160" fill="#101820"/>
+  <path d="M0 1530c550-260 1020-260 1410 0s870 260 1450 0 980-260 980-260v890H0Z" fill="#12332f"/>
+  <path d="M0 1660c520-210 970-210 1350 0s840 210 1390 0 1100-210 1100-210v710H0Z" fill="#165344"/>
+  <circle cx="3020" cy="420" r="150" fill="#f5c542"/>
+  <g transform="translate(1520 620) scale(2.1)">
+    <circle cx="160" cy="166" r="72" fill="#39d98a"/>
+    <circle cx="352" cy="166" r="72" fill="#39d98a"/>
+    <circle cx="160" cy="166" r="34" fill="#101820"/>
+    <circle cx="352" cy="166" r="34" fill="#101820"/>
+    <path d="M76 262c0-93 74-168 180-168s180 75 180 168c0 96-81 170-180 170S76 358 76 262Z" fill="#39d98a"/>
+    <path d="M140 284c25 48 65 72 116 72s91-24 116-72" fill="none" stroke="#101820" stroke-width="28" stroke-linecap="round"/>
+  </g>
+  <text x="1920" y="1700" text-anchor="middle" font-family="Inter, Noto Sans, sans-serif" font-size="150" font-weight="700" fill="#f5f7ef">KokinOS</text>
+</svg>
