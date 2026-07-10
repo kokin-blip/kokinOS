@@ -1,8 +1,14 @@
 # KokinOS
 
-KokinOS is a Bazzite-derived Fedora Atomic KDE image for gaming, programming, and everyday use. It keeps the Bazzite gaming foundation and adds KokinOS branding, developer defaults, and a polished KDE Plasma first impression.
+KokinOS is a Bazzite-derived Fedora Atomic KDE Linux distribution for gaming, programming, and everyday use. It keeps the Bazzite gaming foundation and adds KokinOS branding, developer defaults, and a polished KDE Plasma first impression.
 
-KokinOS is a downstream custom image, not an independent Linux distribution from scratch.
+V1 is a downstream distribution built from Fedora Atomic, Universal Blue, and Bazzite. The long-term project can become more independent over time, but starting from a strong base keeps the first public builds usable for gaming and daily-driver work.
+
+## Why This Repo Says Image
+
+KokinOS is the distribution. Container images and ISO files are the release artifacts.
+
+Fedora Atomic and bootc-based systems are built from bootable OCI container images. That means `ghcr.io/kokin-blip/kokinos:stable` is not a normal app container; it is the OS payload used by `bootc`, the installer ISO, rollback, and updates.
 
 ## Images
 

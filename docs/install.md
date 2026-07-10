@@ -24,6 +24,20 @@ Run the `Build disk images` workflow from GitHub Actions and choose `amd64`. The
 
 Use the standard image for AMD/Intel systems and the NVIDIA image for NVIDIA systems.
 
+## VMware Fusion
+
+VMware Fusion is a good first VM target for KokinOS smoke testing.
+
+1. Run the `Build disk images` workflow from GitHub Actions.
+2. Choose `amd64` for a normal x86_64 VM.
+3. Download the `anaconda-iso` artifact for `kokinos`.
+4. Create a new Linux VM in VMware Fusion and attach the KokinOS ISO.
+5. Boot the VM, install KokinOS, then reboot into the installed system.
+
+Use the standard `kokinos` ISO for VMware Fusion first. The `kokinos-nvidia` image is for NVIDIA hardware testing and is not useful inside a typical VMware virtual GPU setup.
+
+VM testing proves that the installer, boot, login, and desktop defaults work. It does not replace hardware testing for Steam/Proton performance, NVIDIA drivers, controllers, suspend/resume, or real GPU behavior.
+
 ## Docker Pull Troubleshooting
 
 KokinOS images are bootable OS container images. Docker can pull them for inspection, but Docker is not the supported install or boot path. Use `bootc switch` or the ISO artifacts for actual installs.

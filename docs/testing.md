@@ -9,6 +9,7 @@
 
 ## VM
 
+- VMware Fusion boots the `kokinos` Anaconda ISO.
 - ISO boots and installs.
 - Login screen appears.
 - KDE Plasma starts.
