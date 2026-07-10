@@ -15,6 +15,24 @@ on:
         options:
           - amd64
           - arm64
+      image:
+        description: "Image to build"
+        required: true
+        default: kokinos
+        type: choice
+        options:
+          - kokinos
+          - kokinos-nvidia
+          - all
+      disk_type:
+        description: "Disk artifact type to build"
+        required: true
+        default: anaconda-iso
+        type: choice
+        options:
+          - anaconda-iso
+          - qcow2
+          - all
 env:
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
   DEFAULT_TAG: "stable"
@@ -27,6 +45,7 @@ concurrency:
 jobs:
   build:
     name: Build disk images
+    if: ${{ (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
     runs-on: ${{ inputs.platform == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
@@ -82,7 +101,7 @@ jobs:
           image: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}
           chown: ${{ env.USER_UID }}:${{ env.USER_GID }}
           types: ${{ matrix.disk-type }}
-          additional-args: --use-librepo=True
+          additional-args: --use-librepo=True --rootfs=btrfs
 
       - name: Upload disk images and Checksum to Job Artifacts
         if: inputs.upload_to_s3 != true && github.event_name != 'pull_request'
