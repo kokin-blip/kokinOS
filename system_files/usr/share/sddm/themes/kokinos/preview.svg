@@ -25,6 +25,7 @@
     <path d="M76 262c0-93 74-168 180-168s180 75 180 168c0 96-81 170-180 170S76 358 76 262Z" fill="#39d98a"/>
     <path d="M140 284c25 48 65 72 116 72s91-24 116-72" fill="none" stroke="#101820" stroke-width="28" stroke-linecap="round"/>
   </g>
+  <text x="640" y="570" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="58" font-weight="700" fill="#f5f7ef" opacity=".34">KokinOS</text>
   <rect width="1280" height="720" fill="#040b0e" opacity=".46"/>
 
   <rect x="428" y="106" width="424" height="540" rx="38" fill="#000" opacity=".52" filter="url(#shadow)"/>

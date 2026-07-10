@@ -92,7 +92,7 @@ Rectangle {
             id: authCard
             anchors.fill: parent
             radius: 28
-            color: "#c2182328"
+            color: "#eb172126"
             border.color: "#52ffffff"
             border.width: 1
 
@@ -107,7 +107,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.margins: 2
+                anchors.margins: 24
                 height: 1
                 radius: 1
                 color: "#a6ffffff"
