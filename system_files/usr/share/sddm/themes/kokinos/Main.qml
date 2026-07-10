@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.15 as QQC2
 import SddmComponents 2.0
 
 Rectangle {
@@ -38,14 +38,14 @@ Rectangle {
             font.bold: true
         }
 
-        ComboBox {
+        QQC2.ComboBox {
             id: userBox
             width: parent.width
             model: userModel
             textRole: "name"
         }
 
-        TextField {
+        QQC2.TextField {
             id: passwordBox
             width: parent.width
             placeholderText: "Password"
@@ -54,14 +54,14 @@ Rectangle {
             onAccepted: sddm.login(userBox.currentText, passwordBox.text, sessionButton.currentIndex)
         }
 
-        ComboBox {
+        QQC2.ComboBox {
             id: sessionButton
             width: parent.width
             model: sessionModel
             textRole: "name"
         }
 
-        Button {
+        QQC2.Button {
             width: parent.width
             text: "Log In"
             onClicked: sddm.login(userBox.currentText, passwordBox.text, sessionButton.currentIndex)
