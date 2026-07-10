@@ -15,15 +15,6 @@ on:
         options:
           - amd64
           - arm64
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'disk_config/disk.toml'
-      - 'disk_config/iso.toml'
-      - 'disk_config/iso-nvidia.toml'
-      - '.github/workflows/build-disk.yml'
-
 env:
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
   DEFAULT_TAG: "stable"
