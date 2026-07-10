@@ -147,6 +147,32 @@ jobs:
 
           echo "digest=${digest}" >> $GITHUB_OUTPUT
 
+      - name: Install image inspection tools
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq skopeo
+
+      - name: Verify image rootfs metadata
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        env:
+          GHCR_CREDS: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+          DIGEST: ${{ steps.push-image.outputs.digest }}
+        run: |
+          set -euo pipefail
+
+          image_ref="${IMAGE_REGISTRY}/${IMAGE_NAME}@${DIGEST}"
+          layers=$(skopeo inspect --creds "${GHCR_CREDS}" --raw "docker://${image_ref}" | jq '.layers | length')
+          diff_ids=$(skopeo inspect --creds "${GHCR_CREDS}" --config "docker://${image_ref}" | jq '.rootfs.diff_ids | length')
+
+          echo "manifest layers=${layers}"
+          echo "rootfs diff_ids=${diff_ids}"
+
+          if [[ "${layers}" -ne "${diff_ids}" ]]; then
+            echo "Image rootfs metadata does not match manifest layers." >&2
+            exit 1
+          fi
+
       # This section is optional and only needs to be enabled if you plan on distributing
       # your project for others to consume. You will need to create a public and private key
       # using Cosign and save the private key as a repository secret in Github for this workflow

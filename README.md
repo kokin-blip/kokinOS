@@ -35,6 +35,8 @@ Commit `cosign.pub`. Never commit `cosign.key`.
 
 See [docs/install.md](docs/install.md), [docs/testing.md](docs/testing.md), and [docs/branding.md](docs/branding.md).
 
+For Docker snapshotter errors such as `mismatched image rootfs and manifest layers`, use the cleanup and digest-pull commands in [docs/install.md](docs/install.md#docker-pull-troubleshooting).
+
 ## Sources
 
 KokinOS is built with the Universal Blue image-template and derives from Bazzite:
