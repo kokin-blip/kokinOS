@@ -45,7 +45,6 @@ concurrency:
 jobs:
   build:
     name: Build disk images
-    if: ${{ (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
     runs-on: ${{ inputs.platform == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
@@ -76,7 +75,7 @@ jobs:
           echo "USER_GID=${USER_GID}" >> ${GITHUB_ENV}
 
       - name: Install dependencies
-        if: inputs.platform == 'arm64'
+        if: ${{ inputs.platform == 'arm64' && (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
         run: |
           set -x
           sudo apt update -y
@@ -84,15 +83,17 @@ jobs:
             podman
 
       - name: Maximize build space
-        if: inputs.platform != 'arm64'
+        if: ${{ inputs.platform != 'arm64' && (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
         uses: ublue-os/remove-unwanted-software@cc0becac701cf642c8f0a6613bbdaf5dc36b259e # v9
         with:
           remove-codeql: true
 
       - name: Checkout
+        if: ${{ (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
       - name: Build disk images
+        if: ${{ (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
         id: build
         uses: osbuild/bootc-image-builder-action@8661cd3832544ad68c12dcde8681b13ab0f56a8d # main
         with:
@@ -104,7 +105,7 @@ jobs:
           additional-args: --use-librepo=True --rootfs=btrfs
 
       - name: Upload disk images and Checksum to Job Artifacts
-        if: inputs.upload_to_s3 != true && github.event_name != 'pull_request'
+        if: ${{ inputs.upload_to_s3 != true && github.event_name != 'pull_request' && (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           path: ${{ steps.build.outputs.output-directory }}
@@ -114,7 +115,7 @@ jobs:
           overwrite: true
 
       - name: Upload to S3
-        if: inputs.upload_to_s3 == true && github.event_name != 'pull_request'
+        if: ${{ inputs.upload_to_s3 == true && github.event_name != 'pull_request' && (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
         shell: bash
         env:
           RCLONE_CONFIG_S3_TYPE: s3
