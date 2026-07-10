@@ -82,23 +82,24 @@ jobs:
             ${DEFAULT_TAG} \
             ${BASE_IMAGE}
 
-      # This is optional, this provides smaller delta updates
-      - name: Rechunk with rpm-ostree
-        id: rechunk
-        run: |
-          sudo -E $(command -v just) ostree-rechunk \
-            ${IMAGE_NAME} \
-            ${DEFAULT_TAG}
-
-      # If you are feeling adventurous, use the new distro agnostic rechunker
+      # Rechunking can provide smaller delta updates, but it is intentionally
+      # disabled for v1 while the base images and branding layer stabilize.
+      # Re-enable one of these options once the regular build/publish path is green.
+      #
+      # - name: Rechunk with rpm-ostree
+      #   id: rechunk
+      #   run: |
+      #     sudo -E $(command -v just) ostree-rechunk \
+      #       ${IMAGE_NAME} \
+      #       ${DEFAULT_TAG}
+      #
       # https://github.com/coreos/chunkah
-      # You can delete the Rechunk with rpm-ostree portion then if you use this
-      #- name: Rechunk with Chunkah
-      #  id: rechunk
-      #  run: |
-      #    sudo -E $(command -v just) rechunk \
-      #      ${IMAGE_NAME} \
-      #      ${DEFAULT_TAG}
+      # - name: Rechunk with Chunkah
+      #   id: rechunk
+      #   run: |
+      #     sudo -E $(command -v just) rechunk \
+      #       ${IMAGE_NAME} \
+      #       ${DEFAULT_TAG}
 
       - name: Generate Build Tags
         id: gen-build-tags
