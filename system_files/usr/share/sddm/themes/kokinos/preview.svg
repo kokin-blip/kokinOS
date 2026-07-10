@@ -1,23 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff" stop-opacity=".19"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".11"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#263438" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#111a1f" stop-opacity=".92"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+  </defs>
+
   <rect width="1280" height="720" fill="#071014"/>
-  <path d="M0 520c185-92 343-92 474 0s293 92 488 0 318-92 318-92v292H0Z" fill="#10342c" opacity=".75"/>
-  <path d="M0 575c173-70 323-70 450 0s280 70 463 0 367-70 367-70v215H0Z" fill="#134638" opacity=".78"/>
+  <path d="M0 520c185-92 343-92 474 0s293 92 488 0 318-92 318-92v292H0Z" fill="#12332f" opacity=".82"/>
+  <path d="M0 575c173-70 323-70 450 0s280 70 463 0 367-70 367-70v215H0Z" fill="#165344" opacity=".88"/>
   <circle cx="1035" cy="150" r="54" fill="#f5c542" opacity=".72"/>
-  <rect x="430" y="102" width="420" height="516" rx="22" fill="#000" opacity=".28"/>
-  <rect x="430" y="84" width="420" height="516" rx="22" fill="#eaf2e9"/>
-  <rect x="596" y="124" width="88" height="88" rx="24" fill="#101820"/>
-  <circle cx="624" cy="154" r="15" fill="#39d98a"/>
-  <circle cx="656" cy="154" r="15" fill="#39d98a"/>
-  <path d="M608 172c0-31 25-56 32-56s32 25 32 56c0 32-14 56-32 56s-32-24-32-56Z" fill="#39d98a"/>
-  <path d="M616 178c7 13 15 20 24 20s17-7 24-20" fill="none" stroke="#101820" stroke-width="7" stroke-linecap="round"/>
-  <text x="640" y="270" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="36" font-weight="700" fill="#101820">KokinOS</text>
-  <text x="640" y="306" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="14" fill="#5e6a65">Welcome back</text>
-  <rect x="470" y="334" width="340" height="46" rx="12" fill="#f8fbf5" stroke="#d3ded6"/>
-  <rect x="470" y="398" width="340" height="46" rx="12" fill="#f8fbf5" stroke="#2aa8ff" stroke-width="2"/>
-  <rect x="470" y="462" width="340" height="46" rx="12" fill="#f8fbf5" stroke="#d3ded6"/>
-  <rect x="470" y="528" width="340" height="48" rx="12" fill="#39d98a" stroke="#269f63"/>
-  <text x="490" y="363" font-family="Noto Sans, sans-serif" font-size="14" fill="#101820">kokin</text>
-  <text x="490" y="427" font-family="Noto Sans, sans-serif" font-size="14" fill="#7b8782">Password</text>
-  <text x="490" y="491" font-family="Noto Sans, sans-serif" font-size="14" fill="#101820">Plasma</text>
-  <text x="640" y="558" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="15" font-weight="700" fill="#071014">Log In</text>
+  <g opacity=".3" transform="translate(506 190) scale(.52)">
+    <circle cx="160" cy="166" r="72" fill="#39d98a"/>
+    <circle cx="352" cy="166" r="72" fill="#39d98a"/>
+    <circle cx="160" cy="166" r="34" fill="#101820"/>
+    <circle cx="352" cy="166" r="34" fill="#101820"/>
+    <path d="M76 262c0-93 74-168 180-168s180 75 180 168c0 96-81 170-180 170S76 358 76 262Z" fill="#39d98a"/>
+    <path d="M140 284c25 48 65 72 116 72s91-24 116-72" fill="none" stroke="#101820" stroke-width="28" stroke-linecap="round"/>
+  </g>
+  <rect width="1280" height="720" fill="#040b0e" opacity=".46"/>
+
+  <rect x="428" y="106" width="424" height="540" rx="38" fill="#000" opacity=".52" filter="url(#shadow)"/>
+  <rect x="438" y="96" width="404" height="520" rx="28" fill="url(#card)" stroke="#fff" stroke-opacity=".32"/>
+  <path d="M466 97h348" stroke="#fff" stroke-opacity=".68" stroke-linecap="round"/>
+
+  <rect x="604" y="126" width="72" height="72" rx="22" fill="#0d171b" fill-opacity=".64" stroke="#fff" stroke-opacity=".36"/>
+  <circle cx="625" cy="151" r="11" fill="#39d98a"/>
+  <circle cx="655" cy="151" r="11" fill="#39d98a"/>
+  <path d="M613 163c0-24 19-43 27-43s27 19 27 43c0 25-12 43-27 43s-27-18-27-43Z" fill="#39d98a"/>
+  <path d="M621 168c6 10 12 15 19 15s13-5 19-15" fill="none" stroke="#101820" stroke-width="6" stroke-linecap="round"/>
+  <path d="M619 187c6 6 13 9 21 9s15-3 21-9" fill="none" stroke="#2aa8ff" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="640" y="232" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="28" font-weight="600" fill="#f6faf8">KokinOS</text>
+  <text x="640" y="267" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="14" fill="#b8c6c1">Welcome back</text>
+
+  <g fill="url(#field)" stroke="#fff" stroke-opacity=".24">
+    <rect x="468" y="287" width="344" height="44" rx="13"/>
+    <rect x="468" y="343" width="344" height="44" rx="13" stroke="#58baff" stroke-width="2"/>
+    <rect x="468" y="399" width="344" height="44" rx="13"/>
+  </g>
+  <path d="m784 305 6 7 6-7" fill="none" stroke="#b8c6c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m784 417 6 7 6-7" fill="none" stroke="#b8c6c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="485" y="315" font-family="Noto Sans, sans-serif" font-size="14" fill="#f6faf8">kokin</text>
+  <text x="485" y="371" font-family="Noto Sans, sans-serif" font-size="14" fill="#90a49d">Password</text>
+  <text x="485" y="427" font-family="Noto Sans, sans-serif" font-size="14" fill="#f6faf8">Plasma</text>
+
+  <rect x="468" y="455" width="344" height="46" rx="13" fill="#39d98a" stroke="#39d98a" stroke-opacity=".7"/>
+  <text x="640" y="484" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="15" font-weight="600" fill="#06110d">Log In</text>
+  <text x="640" y="552" text-anchor="middle" font-family="Noto Sans, sans-serif" font-size="12" fill="#8fa39b">Gaming-ready. Developer-friendly.</text>
+
+  <text x="28" y="690" font-family="Noto Sans, sans-serif" font-size="14" fill="#b8c6c1" opacity=".84">Friday, July 10</text>
+  <text x="1252" y="690" text-anchor="end" font-family="Noto Sans, sans-serif" font-size="20" font-weight="600" fill="#f6faf8">9:41 AM</text>
 </svg>
