@@ -112,7 +112,7 @@ jobs:
 
       - name: Upload disk images and Checksum to Job Artifacts
         if: ${{ inputs.upload_to_s3 != true && github.event_name != 'pull_request' && inputs.platform == matrix.image.platform && (inputs.image == 'all' || inputs.image == matrix.image.name) && (inputs.disk_type == 'all' || inputs.disk_type == matrix.disk-type) }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           path: ${{ steps.build.outputs.output-directory }}
           if-no-files-found: error
